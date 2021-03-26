@@ -12,7 +12,7 @@ first_date <- "2013-01-01"
 end_date <- as.character(Sys.Date())
 
 # Create list of dates ----------------
-list_date <- seq(as.Date(first_date), as.Date(end_date), by="days")
+list_date <- seq(as.Date(first_date), as.Date(end_date), by = "days")
 
 # Functions ----------------
 scrap_table <- function(webpage) {
@@ -32,7 +32,7 @@ create_df <- function(date) {
   day <- substr(date, 9, 10)
   url <- paste("https://www.xe.com/currencytables/?from=USD&date=",
                paste(year, month, day, sep = "-"),
-               sep='')
+               sep = '')
   df <- scrap_table(url)
   df$date_ref <- mdy(paste(month, day, year, sep = '/'))
   return(df)
@@ -42,7 +42,7 @@ create_df <- function(date) {
 df_main <- create_df(first_date)
 
 # Scrap historical and concatenate data frames ----------------
-for(i in 2:(length(list_date) - 1)) {
+for (i in 2:(length(list_date) - 1)) {
   c <- 0
   while (c < 5) {
     try(df_new <- create_df(list_date[[i]]))
